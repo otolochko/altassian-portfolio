@@ -14,24 +14,31 @@ interface HeroProps {
 
 const Hero = ({ hero }: HeroProps) => {
   return (
-    <section className="pt-32 pb-20 px-4 bg-gradient-to-br from-slate-50 to-blue-50/50">
-      <div className="max-w-4xl mx-auto text-center">
-        <div className="inline-block px-4 py-1.5 bg-blue-100 text-blue-700 rounded-full text-sm font-bold mb-6">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden bg-bg">
+      {/* Decorative blur orbs */}
+      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-float pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[var(--brand-2)]/10 rounded-full blur-3xl animate-float delay-300 pointer-events-none" />
+
+      <div className="relative max-w-4xl mx-auto text-center">
+        <div className="animate-fade-in-up inline-flex items-center gap-2 px-4 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-semibold mb-6 border border-accent/20">
+          <span className="w-2 h-2 rounded-full bg-accent inline-block animate-pulse-slow" />
           {hero.badge}
         </div>
 
-        <h1 className="text-5xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
+        <h1 className="animate-fade-in-up delay-100 text-6xl md:text-7xl font-bold text-text leading-[1.1] tracking-tight mb-6">
           {hero.titleTop}
           <br />
-          <span className="text-blue-600">{hero.titleHighlight}</span>
+          <span className="text-accent">{hero.titleHighlight}</span>
         </h1>
 
-        <p className="text-xl text-slate-600 mb-10 max-w-2xl mx-auto leading-relaxed">{hero.desc}</p>
+        <p className="animate-fade-in-up delay-200 text-lg text-muted mb-10 max-w-2xl mx-auto leading-relaxed">
+          {hero.desc}
+        </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#services">
+        <div className="animate-fade-in-up delay-300 flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="#about">
             <Button type="button">
-              {hero.btnPrimary} <ArrowRight size={18} aria-hidden="true" />
+              {hero.btnPrimary} <ArrowRight size={18} aria-hidden="true" className="group-hover:translate-x-1 transition-transform" />
             </Button>
           </a>
           <a href="#contact">
@@ -41,6 +48,18 @@ const Hero = ({ hero }: HeroProps) => {
           </a>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <a
+        href="#about"
+        className="animate-fade-in-up delay-500 absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted hover:text-accent transition-colors"
+        aria-label="Scroll down"
+      >
+        <span className="text-xs font-semibold uppercase tracking-widest">Scroll</span>
+        <div className="w-5 h-8 rounded-full border-2 border-current flex items-start justify-center pt-1.5">
+          <div className="w-1 h-2 rounded-full bg-current animate-bounce" />
+        </div>
+      </a>
     </section>
   );
 };

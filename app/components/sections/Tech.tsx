@@ -21,13 +21,13 @@ interface TechProps {
 
 const Tech = ({ tech }: TechProps) => {
   return (
-    <section className="py-20 bg-slate-900 text-white">
+    <section className="py-20 bg-section-dark text-white">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl font-bold mb-12 text-center">{tech.title}</h2>
         <div className="grid lg:grid-cols-2 gap-12">
-          <div className="bg-slate-800 p-8 rounded-2xl border border-slate-700">
-            <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
-              <ShieldCheck className="text-blue-400" aria-hidden="true" /> {tech.certsTitle}
+          <div className="glass-dark p-8 rounded-2xl">
+            <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-white">
+              <ShieldCheck className="text-accent" aria-hidden="true" /> {tech.certsTitle}
             </h3>
             <div className="grid gap-3">
               {tech.certs.map((cert, i) => {
@@ -37,7 +37,7 @@ const Tech = ({ tech }: TechProps) => {
                 const icon = isObject ? cert.icon : undefined;
 
                 const content = (
-                  <div className="flex items-center gap-3 p-3 bg-slate-700/50 rounded-lg hover:bg-slate-700 transition-colors group">
+                  <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg hover:bg-accent/15 border border-white/5 hover:border-accent/30 transition-all group">
                     {icon ? (
                       <img
                         src={icon}
@@ -45,9 +45,9 @@ const Tech = ({ tech }: TechProps) => {
                         className="w-7 h-7 object-contain shrink-0 bg-white p-0.5 rounded-full border border-white/20 group-hover:scale-110 transition-transform"
                       />
                     ) : (
-                      <div className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
+                      <div className="w-2 h-2 rounded-full bg-success shrink-0" />
                     )}
-                    <span className="font-medium text-slate-200 text-sm group-hover:text-blue-400 transition-colors">
+                    <span className="font-medium text-white/80 text-sm group-hover:text-accent transition-colors">
                       {text}
                     </span>
                   </div>
@@ -75,9 +75,16 @@ const Tech = ({ tech }: TechProps) => {
           <div className="grid gap-6">
             {tech.stack.map((item, i) => (
               <div key={i}>
-                <h4 className="text-blue-400 font-bold mb-2 uppercase text-xs tracking-wider">{item.category}</h4>
-                <div className="p-4 bg-slate-800 rounded-lg border border-slate-700 text-slate-300 font-mono text-sm">
-                  {item.items}
+                <h4 className="text-accent font-bold mb-2 uppercase text-xs tracking-wider">{item.category}</h4>
+                <div className="p-4 bg-white/5 rounded-lg border border-white/10 flex flex-wrap gap-2">
+                  {item.items.split(",").map((tag, tIdx) => (
+                    <span
+                      key={tIdx}
+                      className="px-2 py-0.5 bg-accent/15 border border-accent/20 rounded text-accent/90 text-xs font-mono hover:bg-accent/25 transition-colors"
+                    >
+                      {tag.trim()}
+                    </span>
+                  ))}
                 </div>
               </div>
             ))}

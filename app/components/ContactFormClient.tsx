@@ -39,29 +39,18 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-
-    // honeypot (bots)
     if (form.company.trim()) return;
-
     if (!canSubmit) {
       setStatus("error");
       return;
     }
-
     setStatus("submitting");
-
-    
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          message: form.message,
-        }),
+        body: JSON.stringify({ name: form.name, email: form.email, message: form.message }),
       });
-
       if (response.ok) {
         setStatus("success");
         setForm({ name: "", email: "", message: "", company: "" });
@@ -75,17 +64,16 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-6" noValidate>
+    <form onSubmit={onSubmit} className="space-y-5" noValidate>
       {status === "success" && (
-        <div className="flex items-start gap-3 rounded-lg border border-green-200 bg-green-50 p-4 text-green-800">
-          <CheckCircle2 className="mt-0.5 h-5 w-5" aria-hidden="true" />
+        <div className="flex items-start gap-3 rounded-lg border border-success/30 bg-success/10 p-4 text-success">
+          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
           <div className="text-sm">{labels.success}</div>
         </div>
       )}
-
       {status === "error" && (
-        <div className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4 text-red-800">
-          <AlertCircle className="mt-0.5 h-5 w-5" aria-hidden="true" />
+        <div className="flex items-start gap-3 rounded-lg border border-danger/30 bg-danger/10 p-4 text-danger">
+          <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
           <div className="text-sm">{labels.error}</div>
         </div>
       )}
@@ -104,7 +92,7 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
       </div>
 
       <div>
-        <label htmlFor={nameId} className="block text-sm font-bold text-slate-700 mb-2">
+        <label htmlFor={nameId} className="block text-[11px] font-semibold uppercase tracking-wider text-muted mb-2">
           {labels.name}
         </label>
         <input
@@ -112,7 +100,7 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
           name="name"
           type="text"
           autoComplete="name"
-          className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-blue-500 outline-none"
+          className="w-full px-3 py-2.5 rounded-lg bg-field-bg border border-border text-text placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all duration-200 text-sm shadow-inner-sm"
           value={form.name}
           onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
           required
@@ -120,7 +108,7 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
       </div>
 
       <div>
-        <label htmlFor={emailId} className="block text-sm font-bold text-slate-700 mb-2">
+        <label htmlFor={emailId} className="block text-[11px] font-semibold uppercase tracking-wider text-muted mb-2">
           {labels.email}
         </label>
         <input
@@ -129,33 +117,33 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
           type="email"
           autoComplete="email"
           inputMode="email"
-          className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-blue-500 outline-none"
+          className="w-full px-3 py-2.5 rounded-lg bg-field-bg border border-border text-text placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all duration-200 text-sm shadow-inner-sm"
           value={form.email}
           onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
           required
           aria-invalid={form.email.length > 0 && !emailOk}
         />
         {form.email.length > 0 && !emailOk && (
-          <p className="mt-2 text-xs text-red-600">
+          <p className="mt-2 text-xs text-danger">
             {lang === "en" ? "Please enter a valid email." : "Вкажіть коректний email."}
           </p>
         )}
       </div>
 
       <div>
-        <label htmlFor={msgId} className="block text-sm font-bold text-slate-700 mb-2">
+        <label htmlFor={msgId} className="block text-[11px] font-semibold uppercase tracking-wider text-muted mb-2">
           {labels.message}
         </label>
         <textarea
           id={msgId}
           name="message"
           rows={4}
-          className="w-full px-4 py-3 rounded-lg bg-slate-50 border border-slate-200 focus:border-blue-500 outline-none resize-none"
+          className="w-full px-3 py-2.5 rounded-lg bg-field-bg border border-border text-text placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none resize-none transition-all duration-200 text-sm shadow-inner-sm"
           value={form.message}
           onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
           required
         />
-        <p className="mt-2 text-xs text-slate-500">
+        <p className="mt-2 text-xs text-muted">
           {lang === "en"
             ? "Tip: include context, target timeline, and whether you use Cloud or Data Center."
             : "Порада: додай контекст, бажані строки та чи це Cloud чи Data Center."}
@@ -165,9 +153,9 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
       <button
         type="submit"
         disabled={!canSubmit}
-        className="w-full bg-slate-900 text-white font-bold py-4 rounded-lg hover:bg-slate-800 transition shadow-lg disabled:opacity-60 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2"
+        className="w-full bg-gradient-to-r from-accent to-accent-hover text-white font-semibold py-2.5 rounded-lg hover:shadow-lg hover:shadow-accent/30 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] text-sm"
       >
-        {status === "submitting" && <Loader2 className="h-5 w-5 animate-spin" aria-hidden="true" />}
+        {status === "submitting" && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
         {labels.submit}
       </button>
     </form>
