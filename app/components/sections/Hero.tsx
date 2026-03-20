@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Button from "../ui/Button";
+import HeroAurora from "./HeroAurora";
 
 interface HeroProps {
   hero: {
@@ -15,9 +16,7 @@ interface HeroProps {
 const Hero = ({ hero }: HeroProps) => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-4 overflow-hidden bg-bg">
-      {/* Decorative blur orbs */}
-      <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-accent/10 rounded-full blur-3xl animate-float pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[var(--brand-2)]/10 rounded-full blur-3xl animate-float delay-300 pointer-events-none" />
+      <HeroAurora />
 
       <div className="relative max-w-4xl mx-auto text-center">
         <div className="animate-fade-in-up inline-flex items-center gap-2 px-4 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-semibold mb-6 border border-accent/20">
