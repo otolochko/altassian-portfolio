@@ -2,6 +2,8 @@ GEMINI.md
 CLAUDE.md
 tasks.txt
 /images/
+.agents/
+.claude/
 
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
@@ -443,3 +445,4 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+skills-lock.json

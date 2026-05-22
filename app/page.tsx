@@ -25,7 +25,7 @@ export default async function Page({
     <div className="min-h-screen bg-bg font-sans text-text">
       <Navbar nav={t.nav} lang={lang} nextLang={nextLang} />
       <main>
-        <Hero hero={t.hero} />
+        <Hero hero={t.hero} cards={t.projects.items} />
         <About about={t.about} />
         <Tech tech={t.tech} />
         <Challenges challenges={t.challenges} />
