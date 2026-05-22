@@ -37,7 +37,7 @@ const Tech = ({ tech }: TechProps) => {
                 const icon = isObject ? cert.icon : undefined;
 
                 const content = (
-                  <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg hover:bg-accent/15 border border-white/5 hover:border-accent/30 transition-all group">
+                  <div className="flex items-center gap-3 p-3 bg-white/5 rounded-lg hover:bg-accent/15 border border-white/5 hover:border-accent/30 transition-[background-color,border-color] duration-150 ease-out group">
                     {icon ? (
                       <img
                         src={icon}

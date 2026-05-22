@@ -25,7 +25,7 @@ const Projects = ({ projects }: ProjectsProps) => {
           {projects.items.map((project, idx) => (
             <div
               key={idx}
-              className="bg-surface-raised backdrop-blur-xl rounded-2xl overflow-hidden border border-border shadow-glass hover:shadow-glass-lg hover:-translate-y-1 hover:border-accent/30 transition-all duration-300 flex flex-col"
+              className="bg-surface-raised backdrop-blur-xl rounded-2xl overflow-hidden border border-border shadow-glass hover:shadow-glass-lg hover:-translate-y-1 hover:border-accent/30 transition-[transform,box-shadow,border-color] duration-200 ease-out flex flex-col"
             >
               <div className="p-8 flex-1">
                 <div className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider mb-3 bg-accent/10 text-accent border border-accent/20">

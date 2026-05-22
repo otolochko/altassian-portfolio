@@ -34,7 +34,7 @@ const Areas = ({ areas }: AreasProps) => {
           {areas.items.map((area, idx) => (
             <div
               key={idx}
-              className="bg-surface-raised backdrop-blur-xl p-6 rounded-2xl border border-border shadow-glass hover:shadow-glass-lg hover:-translate-y-1 hover:border-accent/30 transition-all duration-300 group"
+              className="bg-surface-raised backdrop-blur-xl p-6 rounded-2xl border border-border shadow-glass hover:shadow-glass-lg hover:-translate-y-1 hover:border-accent/30 transition-[transform,box-shadow,border-color] duration-200 ease-out group"
             >
               <div className="w-10 h-10 bg-accent text-white rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm shadow-accent/30">
                 {iconMap[area.icon as keyof typeof iconMap]}

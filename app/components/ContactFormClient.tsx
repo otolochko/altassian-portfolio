@@ -100,7 +100,7 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
           name="name"
           type="text"
           autoComplete="name"
-          className="w-full px-3 py-2.5 rounded-lg bg-field-bg border border-border text-text placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all duration-200 text-sm shadow-inner-sm"
+          className="w-full px-3 py-2.5 rounded-lg bg-field-bg border border-border text-text placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-[border-color,box-shadow] duration-150 ease-out text-sm shadow-inner-sm"
           value={form.name}
           onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
           required
@@ -117,7 +117,7 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
           type="email"
           autoComplete="email"
           inputMode="email"
-          className="w-full px-3 py-2.5 rounded-lg bg-field-bg border border-border text-text placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all duration-200 text-sm shadow-inner-sm"
+          className="w-full px-3 py-2.5 rounded-lg bg-field-bg border border-border text-text placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-[border-color,box-shadow] duration-150 ease-out text-sm shadow-inner-sm"
           value={form.email}
           onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
           required
@@ -138,7 +138,7 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
           id={msgId}
           name="message"
           rows={4}
-          className="w-full px-3 py-2.5 rounded-lg bg-field-bg border border-border text-text placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none resize-none transition-all duration-200 text-sm shadow-inner-sm"
+          className="w-full px-3 py-2.5 rounded-lg bg-field-bg border border-border text-text placeholder:text-muted focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none resize-none transition-[border-color,box-shadow] duration-150 ease-out text-sm shadow-inner-sm"
           value={form.message}
           onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
           required
@@ -153,7 +153,7 @@ export default function ContactFormClient({ lang, labels }: { lang: Lang; labels
       <button
         type="submit"
         disabled={!canSubmit}
-        className="w-full bg-gradient-to-r from-accent to-accent-hover text-white font-semibold py-2.5 rounded-lg hover:shadow-lg hover:shadow-accent/30 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99] text-sm"
+        className="w-full bg-gradient-to-r from-accent to-accent-hover text-white font-semibold py-2.5 rounded-lg hover:shadow-lg hover:shadow-accent/30 transition-[transform,box-shadow] duration-150 ease-out disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.97] disabled:active:scale-100 text-sm"
       >
         {status === "submitting" && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
         {labels.submit}

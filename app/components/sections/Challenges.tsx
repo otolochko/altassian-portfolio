@@ -56,9 +56,9 @@ const Challenges = ({ challenges }: ChallengesProps) => {
           {challenges.items.map((item, idx) => (
             <div
               key={idx}
-              className="bg-card rounded-2xl overflow-hidden border border-border shadow-glass hover:shadow-glass-lg hover:-translate-y-1 transition-all duration-300 group"
+              className="bg-card rounded-2xl overflow-hidden border border-border shadow-glass hover:shadow-glass-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-200 ease-out group"
             >
-              <div className="h-1 bg-gradient-to-r from-danger to-warning group-hover:from-warning group-hover:to-danger transition-all duration-300" />
+              <div className="h-1 bg-gradient-to-r from-danger to-warning group-hover:from-warning group-hover:to-danger transition-[background] duration-300 ease-out" />
               <div className="p-6">
                 <div className="mb-4 pb-4 border-b border-border">
                   <div className="flex items-center gap-2 mb-2 text-danger font-bold text-xs uppercase tracking-wider">

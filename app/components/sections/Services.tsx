@@ -25,7 +25,7 @@ const Services = ({ services }: ServicesProps) => {
           {services.items.map((service, idx) => (
             <div
               key={idx}
-              className="relative bg-card backdrop-blur-xl p-8 rounded-2xl border border-border shadow-glass hover:shadow-glass-lg hover:-translate-y-1 hover:border-accent/30 transition-all duration-300 overflow-hidden group"
+              className="relative bg-card backdrop-blur-xl p-8 rounded-2xl border border-border shadow-glass hover:shadow-glass-lg hover:-translate-y-1 hover:border-accent/30 transition-[transform,box-shadow,border-color] duration-200 ease-out overflow-hidden group"
             >
               <div className="absolute top-4 right-6 text-6xl font-black text-surface-overlay select-none leading-none pointer-events-none group-hover:text-accent/10 transition-colors">
                 {String(idx + 1).padStart(2, "0")}

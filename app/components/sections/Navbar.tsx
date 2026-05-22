@@ -42,7 +42,7 @@ const Navbar = ({ nav, lang, nextLang }: NavbarProps) => {
                 className="relative text-muted hover:text-accent transition-colors group"
               >
                 {label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent rounded-full transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent rounded-full transition-[width] duration-200 ease-out group-hover:w-full" />
               </a>
             ))}
           </div>
@@ -58,7 +58,7 @@ const Navbar = ({ nav, lang, nextLang }: NavbarProps) => {
             </Link>
             <a
               href="#contact"
-              className="hidden sm:block bg-gradient-to-r from-accent to-accent-hover text-white px-4 py-2 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-accent/30 transition-all duration-200 hover:scale-[1.02]"
+              className="hidden sm:block bg-gradient-to-r from-accent to-accent-hover text-white px-4 py-2 rounded-lg font-semibold text-sm hover:shadow-lg hover:shadow-accent/30 transition-[transform,box-shadow] duration-150 ease-out hover:scale-[1.02] active:scale-[0.97]"
             >
               {nav.cta}
             </a>

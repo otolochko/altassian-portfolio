@@ -19,12 +19,12 @@ const About = ({ about }: AboutProps) => {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <div className="relative p-6 bg-surface-raised rounded-2xl border border-border text-center shadow-glass hover:shadow-glass-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden group backdrop-blur-xl">
+          <div className="relative p-6 bg-surface-raised rounded-2xl border border-border text-center shadow-glass hover:shadow-glass-lg hover:-translate-y-0.5 transition-[transform,box-shadow] duration-200 ease-out overflow-hidden group backdrop-blur-xl">
             <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative text-5xl font-bold text-accent mb-2">8+</div>
             <div className="relative text-xs text-muted font-semibold uppercase tracking-wider">{about.stat1}</div>
           </div>
-          <div className="relative p-6 bg-surface-raised rounded-2xl border border-border text-center shadow-glass hover:shadow-glass-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden group backdrop-blur-xl">
+          <div className="relative p-6 bg-surface-raised rounded-2xl border border-border text-center shadow-glass hover:shadow-glass-lg hover:-translate-y-0.5 transition-[transform,box-shadow] duration-200 ease-out overflow-hidden group backdrop-blur-xl">
             <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative text-5xl font-bold text-accent mb-2">ACE</div>
             <div className="relative text-xs text-muted font-semibold uppercase tracking-wider">{about.stat2}</div>
