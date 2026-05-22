@@ -59,7 +59,7 @@ export const TRANSLATIONS = {
       stack: [
         {
           category: "Scripting & Automation",
-          items: "Automation for Jira (Smart Values, JSON), ScriptRunner (Groovy), Python",
+          items: "Automation for Jira, ScriptRunner (Groovy), Python, Microsoft Power Automate",
         },
         { category: "Integration & Dev", items: "REST API, Webhooks, Forge, OAuth" },
         {
@@ -274,7 +274,7 @@ export const TRANSLATIONS = {
       stack: [
         {
           category: "Scripting & Automation",
-          items: "Automation for Jira (Smart Values, JSON), ScriptRunner (Groovy), Python",
+          items: "Automation for Jira, ScriptRunner (Groovy), Python, Microsoft Power Automate",
         },
         { category: "Integration & Dev", items: "REST API, Webhooks, Forge, OAuth" },
         {
