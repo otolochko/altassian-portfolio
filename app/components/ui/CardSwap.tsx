@@ -2,7 +2,6 @@
 
 import React, {
   Children,
-  cloneElement,
   forwardRef,
   isValidElement,
   useEffect,
@@ -42,7 +41,51 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 );
 Card.displayName = "Card";
 
-// ─── CardSwap ─────────────────────────────────────────────────────────────────
+// ─── DoneBadge ───────────────────────────────────────────────────────────────
+
+const DoneBadge = forwardRef<HTMLDivElement>((_, ref) => (
+  <div
+    ref={ref}
+    style={{
+      display: "flex",
+      alignItems: "center",
+      gap: "6px",
+      background: "rgba(39, 174, 96, 0.18)",
+      border: "1.5px solid rgba(39, 174, 96, 0.55)",
+      borderRadius: "9999px",
+      padding: "6px 14px",
+      backdropFilter: "blur(4px)",
+      WebkitBackdropFilter: "blur(4px)",
+      transform: "scale(0.75)",
+    }}
+  >
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <circle cx="7" cy="7" r="6" stroke="rgba(39,174,96,0.9)" strokeWidth="1.5" />
+      <path
+        d="M4 7L6.5 9.5L10 5"
+        stroke="#27ae60"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+    <span
+      style={{
+        color: "#27ae60",
+        fontWeight: 700,
+        fontSize: "11px",
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+        fontFamily: "var(--font-ibm-mono, ui-monospace, monospace)",
+      }}
+    >
+      Done
+    </span>
+  </div>
+));
+DoneBadge.displayName = "DoneBadge";
+
+// ─── CardSwap ────────────────────────────────────────────────────────────────
 
 const makeSlot = (i: number, distX: number, distY: number, total: number) => ({
   x: i * distX,
@@ -113,7 +156,20 @@ const CardSwap = ({
         };
 
   const childArr = useMemo(() => Children.toArray(children), [children]);
+
   const refs = useMemo(
+    () => childArr.map(() => React.createRef<HTMLDivElement>()),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [childArr.length]
+  );
+
+  const overlayRefs = useMemo(
+    () => childArr.map(() => React.createRef<HTMLDivElement>()),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [childArr.length]
+  );
+
+  const badgeRefs = useMemo(
     () => childArr.map(() => React.createRef<HTMLDivElement>()),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [childArr.length]
@@ -134,11 +190,27 @@ const CardSwap = ({
       if (order.current.length < 2) return;
       const [front, ...rest] = order.current;
       const elFront = refs[front].current;
+      const overlayEl = overlayRefs[front].current;
+      const badgeEl = badgeRefs[front].current;
       if (!elFront) return;
 
       const tl = gsap.timeline();
       tlRef.current = tl;
 
+      // ── "Done" flash before the card leaves ──────────────────────────────
+      if (overlayEl && badgeEl) {
+        tl.set(overlayEl, { opacity: 0 });
+        tl.set(badgeEl, { opacity: 0, scale: 0.75 });
+        // Overlay fades in + badge bounces in together
+        tl.to(overlayEl, { opacity: 1, duration: 0.2, ease: "power2.out" });
+        tl.to(badgeEl, { opacity: 1, scale: 1, duration: 0.28, ease: "back.out(1.5)" }, "<");
+        // Hold so user reads "Done"
+        tl.to({}, { duration: 0.32 });
+        // Fade overlay out as the drop begins
+        tl.to(overlayEl, { opacity: 0, duration: 0.25, ease: "power2.in" }, "+=0");
+      }
+
+      // ── Drop ─────────────────────────────────────────────────────────────
       tl.to(elFront, { y: "+=500", duration: config.durDrop, ease: config.ease });
 
       tl.addLabel("promote", `-=${config.durDrop * config.promoteOverlap}`);
@@ -152,7 +224,12 @@ const CardSwap = ({
 
       const backSlot = makeSlot(refs.length - 1, cardDistance, verticalDistance, refs.length);
       tl.addLabel("return", `promote+=${config.durMove * config.returnDelay}`);
-      tl.call(() => { gsap.set(elFront, { zIndex: backSlot.zIndex }); }, undefined, "return");
+      tl.call(() => {
+        gsap.set(elFront, { zIndex: backSlot.zIndex });
+        // Ensure overlay is hidden before card slides back into view
+        if (overlayEl) gsap.set(overlayEl, { opacity: 0 });
+        if (badgeEl) gsap.set(badgeEl, { opacity: 0, scale: 0.75 });
+      }, undefined, "return");
       tl.to(elFront, { x: backSlot.x, y: backSlot.y, z: backSlot.z, duration: config.durReturn, ease: config.ease }, "return");
       tl.call(() => { order.current = [...rest, front]; });
     };
@@ -193,6 +270,27 @@ const CardSwap = ({
         className={props.className}
       >
         {props.children}
+
+        {/* "Done" state overlay — animated by GSAP before each swap */}
+        <div
+          ref={overlayRefs[i]}
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "16px",
+            background: "var(--card)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            opacity: 0,
+            pointerEvents: "none",
+            zIndex: 10,
+          }}
+        >
+          <DoneBadge ref={badgeRefs[i]} />
+        </div>
       </Card>
     );
   });

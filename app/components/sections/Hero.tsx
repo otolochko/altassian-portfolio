@@ -25,10 +25,10 @@ interface HeroProps {
 const tagColors: Record<string, string> = {
   Security: "bg-danger/10 text-danger",
   Compliance: "bg-warning/10 text-warning",
-  Performance: "bg-success/10 text-success",
+  Permissions: "bg-danger/10 text-danger",
   JSM: "bg-accent/10 text-accent",
   SLA: "bg-accent/10 text-accent",
-  Automation: "bg-success/10 text-success",
+  "On-call": "bg-accent/10 text-accent",
   "Multi-tenancy": "bg-accent/10 text-accent",
   Governance: "bg-warning/10 text-warning",
   Tempo: "bg-muted/10 text-muted",
