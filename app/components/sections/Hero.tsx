@@ -42,7 +42,7 @@ const Hero = ({ hero, cards }: HeroProps) => {
       <HeroAurora />
 
       {/* ── Text side (60%) ─────────────────────────────── */}
-      <div className="relative w-full xl:w-[60%] flex flex-col items-center xl:items-start text-center xl:text-left">
+      <div className="relative w-full xl:w-[60%] flex flex-col items-center xl:items-start text-center xl:text-left xl:pl-16">
         <div className="animate-fade-in-up inline-flex items-center gap-2 px-4 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-semibold mb-6 border border-accent/20">
           <span className="w-2 h-2 rounded-full bg-accent inline-block animate-pulse-slow" />
           {hero.badge}
