@@ -14,30 +14,30 @@ interface ProjectsProps {
 
 const Projects = ({ projects }: ProjectsProps) => {
   return (
-    <section id="projects" className="py-20 bg-blue-50 border-t border-slate-200 ">
+    <section id="projects" className="py-20 bg-card border-t border-border">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">{projects.title}</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">{projects.desc}</p>
+          <h2 className="text-3xl font-bold text-text mb-4">{projects.title}</h2>
+          <p className="text-muted max-w-2xl mx-auto">{projects.desc}</p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6">
           {projects.items.map((project, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg border border-slate-200 transition-all flex flex-col"
+              className="bg-surface-raised backdrop-blur-xl rounded-2xl overflow-hidden border border-border shadow-glass hover:shadow-glass-lg hover:-translate-y-1 hover:border-accent/30 transition-[transform,box-shadow,border-color] duration-200 ease-out flex flex-col"
             >
               <div className="p-8 flex-1">
-                <div className="text-xs font-bold tracking-wider text-blue-600 uppercase mb-3">
+                <div className="inline-flex items-center px-3 py-1 rounded-lg text-xs font-semibold uppercase tracking-wider mb-3 bg-accent/10 text-accent border border-accent/20">
                   {project.category}
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{project.title}</h3>
-                <p className="text-slate-600 mb-5 leading-relaxed">{project.desc}</p>
+                <h3 className="text-base font-bold text-text mb-3">{project.title}</h3>
+                <p className="text-muted mb-5 leading-relaxed text-sm">{project.desc}</p>
 
                 <ul className="space-y-2 mb-6">
                   {project.outcomes.map((o, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-slate-700">
-                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 shrink-0" />
+                    <li key={i} className="flex items-start gap-2 text-sm text-muted">
+                      <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0" />
                       {o}
                     </li>
                   ))}
@@ -45,7 +45,10 @@ const Projects = ({ projects }: ProjectsProps) => {
 
                 <div className="flex flex-wrap gap-2 mt-auto">
                   {project.tags.map((tag, tIdx) => (
-                    <span key={tIdx} className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-full">
+                    <span
+                      key={tIdx}
+                      className="px-3 py-1 bg-surface-overlay text-muted text-xs font-medium rounded-lg border border-border hover:bg-accent/10 hover:text-accent hover:border-accent/20 transition-colors"
+                    >
                       {tag}
                     </span>
                   ))}

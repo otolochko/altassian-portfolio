@@ -10,22 +10,24 @@ interface AboutProps {
 
 const About = ({ about }: AboutProps) => {
   return (
-    <section id="about" className="py-16 bg-white border-y border-slate-100">
+    <section id="about" className="py-16 bg-card border-y border-border">
       <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
         <div>
-          <h2 className="text-3xl font-bold mb-6 text-slate-900">{about.title}</h2>
-          <p className="text-slate-600 mb-4 text-lg">{about.p1}</p>
-          <p className="text-slate-600">{about.p2}</p>
+          <h2 className="text-3xl font-bold mb-6 text-text">{about.title}</h2>
+          <p className="text-muted mb-4 text-lg leading-relaxed">{about.p1}</p>
+          <p className="text-muted leading-relaxed">{about.p2}</p>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <div className="p-6 bg-slate-50 rounded-xl border border-slate-100 text-center">
-            <div className="text-4xl font-bold text-blue-600 mb-2">8+</div>
-            <div className="text-sm text-slate-500 font-medium uppercase">{about.stat1}</div>
+          <div className="relative p-6 bg-surface-raised rounded-2xl border border-border text-center shadow-glass hover:shadow-glass-lg hover:-translate-y-0.5 transition-[transform,box-shadow] duration-200 ease-out overflow-hidden group backdrop-blur-xl">
+            <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="relative text-5xl font-bold text-accent mb-2">8+</div>
+            <div className="relative text-xs text-muted font-semibold uppercase tracking-wider">{about.stat1}</div>
           </div>
-          <div className="p-6 bg-slate-50 rounded-xl border border-slate-100 text-center">
-            <div className="text-4xl font-bold text-blue-600 mb-2">ACE</div>
-            <div className="text-sm text-slate-500 font-medium uppercase">{about.stat2}</div>
+          <div className="relative p-6 bg-surface-raised rounded-2xl border border-border text-center shadow-glass hover:shadow-glass-lg hover:-translate-y-0.5 transition-[transform,box-shadow] duration-200 ease-out overflow-hidden group backdrop-blur-xl">
+            <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="relative text-5xl font-bold text-accent mb-2">ACE</div>
+            <div className="relative text-xs text-muted font-semibold uppercase tracking-wider">{about.stat2}</div>
           </div>
         </div>
       </div>

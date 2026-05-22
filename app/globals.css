@@ -1,107 +1,160 @@
 @import "tailwindcss";
 
-/*
-  Atlassian Design System (ADS) colors:
-  - Prefer design tokens (CSS custom properties starting with --ds-)
-  - Provide fallbacks so the site still renders correctly even if tokens are not available.
-*/
+/* Dark mode: responds to [data-theme="dark"] on <html> */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+/* ── Design System CSS Variables ── */
 :root {
-  /* Base */
-  --background: var(--ds-surface, #FFFFFF);
-  --foreground: var(--ds-text, #172B4D);
-  --muted: var(--ds-text-subtle, #44546F);
-  --border: var(--ds-border, #DFE1E6);
+  --accent:           #2f80ed;
+  --accent-hover:     #1a6cd4;
+  --success:          #27ae60;
+  --danger:           #eb5757;
+  --warning:          #f2c94c;
+  --bg:               #f4f7fa;
+  --card:             rgba(255, 255, 255, 0.92);
+  --field-bg:         rgba(255, 255, 255, 0.95);
+  --border:           rgba(15, 35, 70, 0.12);
+  --text-primary:     #2d3436;
+  --text-muted:       #6c757d;
+  --surface-raised:   rgba(255, 255, 255, 0.6);
+  --surface-overlay:  rgba(9, 30, 66, 0.04);
+  --brand-2:          #00b8d9;
+  --section-dark:     #1e293b;
 
-  /* Surfaces */
-  --surface: var(--ds-surface-raised, #FFFFFF);
-  --surface-sunken: var(--ds-surface-sunken, #F4F5F7);
-  --surface-inverse: var(--ds-surface-inverse, #172B4D);
+  /* Strong easing curves — generic ease-out/in-out are too weak */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
 
-  /* Text (inverse) */
-  --inverse: var(--ds-text-inverse, #FFFFFF);
-  --inverse-muted: var(--ds-text-inverse, #DEEBFF);
-
-  /* Brand + link */
-  --link: var(--ds-link, #0052CC);
-  --brand: var(--ds-background-brand-bold, #0052CC);
-  --brand-hover: var(--ds-background-brand-bold-hovered, #0065FF);
-
-  /* Status/intent */
-  --info: var(--ds-background-information, #DEEBFF);
-  --info-text: var(--ds-text-information, #0052CC);
-
-  --success: var(--ds-background-success, #E3FCEF);
-  --success-text: var(--ds-text-success, #216E4E);
-
-  --danger: var(--ds-background-danger, #FFEBE6);
-  --danger-text: var(--ds-text-danger, #AE2E24);
+[data-theme="dark"] {
+  --accent:           #4f8fff;
+  --accent-hover:     #6ba3ff;
+  --success:          #2ecc71;
+  --danger:           #ff6b6b;
+  --warning:          #f2c94c;
+  --bg:               #121212;
+  --card:             rgba(30, 30, 30, 0.92);
+  --field-bg:         #1e1e1e;
+  --border:           rgba(240, 246, 252, 0.1);
+  --text-primary:     #ffffff;
+  --text-muted:       #a0aec0;
+  --surface-raised:   rgba(48, 54, 61, 0.4);
+  --surface-overlay:  rgba(240, 246, 252, 0.03);
+  --brand-2:          #00c7e6;
+  --section-dark:     #0d1117;
 }
 
 @theme inline {
-  /* Existing template hooks */
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Fonts (loaded via next/font) */
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-ibm-mono);
 
-  /* Custom ADS-mapped colors */
-  --color-muted: var(--muted);
-  --color-border: var(--border);
+  /* Color tokens */
+  --color-accent:          var(--accent);
+  --color-primary:         var(--accent);
+  --color-accent-hover:    var(--accent-hover);
+  --color-success:         var(--success);
+  --color-secondary:       var(--success);
+  --color-danger:          var(--danger);
+  --color-warning:         var(--warning);
+  --color-bg:              var(--bg);
+  --color-card:            var(--card);
+  --color-field-bg:        var(--field-bg);
+  --color-border:          var(--border);
+  --color-text:            var(--text-primary);
+  --color-muted:           var(--text-muted);
+  --color-surface-raised:  var(--surface-raised);
+  --color-surface-overlay: var(--surface-overlay);
+  --color-section-dark:    var(--section-dark);
 
-  --color-surface: var(--surface);
-  --color-surface-sunken: var(--surface-sunken);
-  --color-surface-inverse: var(--surface-inverse);
-
-  --color-link: var(--link);
-  --color-brand: var(--brand);
-  --color-brand-hover: var(--brand-hover);
-
-  --color-inverse: var(--inverse);
-  --color-inverse-muted: var(--inverse-muted);
-
-  --color-info: var(--info);
-  --color-info-text: var(--info-text);
-
-  --color-success: var(--success);
-  --color-success-text: var(--success-text);
-
-  --color-danger: var(--danger);
-  --color-danger-text: var(--danger-text);
+  /* Shadow tokens */
+  --shadow-glass:    0 4px 24px rgba(15, 35, 70, 0.08), 0 1px 3px rgba(15, 35, 70, 0.05);
+  --shadow-glass-lg: 0 8px 48px rgba(15, 35, 70, 0.10), 0 2px 8px rgba(15, 35, 70, 0.06);
+  --shadow-inner-sm: inset 0 1px 3px rgba(15, 35, 70, 0.08);
 }
 
-/* Fallback dark mode (if ADS tokens are not present) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: var(--ds-surface, #1D2125);
-    --foreground: var(--ds-text, #DEE4EA);
-    --muted: var(--ds-text-subtle, #9FADBC);
-    --border: var(--ds-border, #3D4751);
-
-    --surface: var(--ds-surface-raised, #22272B);
-    --surface-sunken: var(--ds-surface-sunken, #1D2125);
-    --surface-inverse: var(--ds-surface-inverse, #0B0F14);
-
-    --inverse: var(--ds-text-inverse, #FFFFFF);
-    --inverse-muted: var(--ds-text-inverse, #C7D1DB);
-
-    --link: var(--ds-link, #579DFF);
-    --brand: var(--ds-background-brand-bold, #579DFF);
-    --brand-hover: var(--ds-background-brand-bold-hovered, #85B8FF);
-
-    --info: var(--ds-background-information, #09326C);
-    --info-text: var(--ds-text-information, #85B8FF);
-
-    --success: var(--ds-background-success, #164B35);
-    --success-text: var(--ds-text-success, #7EE2B8);
-
-    --danger: var(--ds-background-danger, #5D1F1A);
-    --danger-text: var(--ds-text-danger, #FD9891);
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+/* ── Animations ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.6; }
+}
+
+/* Smooth downward scroll cue — avoids Tailwind bounce's ease-in segments */
+@keyframes scrollDot {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  60%       { transform: translateY(8px); opacity: 0.3; }
+}
+
+.animate-fade-in-up    { animation: fadeInUp   0.45s var(--ease-out) both; }
+.animate-fade-in-left  { animation: fadeInLeft  0.45s var(--ease-out) both; }
+.animate-fade-in-right { animation: fadeInRight 0.45s var(--ease-out) both; }
+.animate-float         { animation: float 6s var(--ease-in-out) infinite; }
+.animate-pulse-slow    { animation: pulse-slow 3s ease-in-out infinite; }
+.animate-scroll-dot    { animation: scrollDot 1.8s var(--ease-out) infinite; }
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-up,
+  .animate-fade-in-left,
+  .animate-fade-in-right,
+  .animate-float,
+  .animate-scroll-dot {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .animate-pulse-slow {
+    animation: none;
+  }
+}
+
+/* ── Glass utilities ── */
+.glass {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+.glass-dark {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }

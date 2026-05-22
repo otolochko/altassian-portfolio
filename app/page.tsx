@@ -16,18 +16,16 @@ export default async function Page({
   searchParams?: Promise<SearchParams> | SearchParams;
 }) {
   const sp = (await Promise.resolve(searchParams ?? {})) as SearchParams;
-
   const rawLang = sp.lang;
   const lang: Lang = (Array.isArray(rawLang) ? rawLang[0] : rawLang) === "uk" ? "uk" : "en";
   const t = TRANSLATIONS[lang];
-
   const nextLang: Lang = lang === "en" ? "uk" : "en";
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-800">
+    <div className="min-h-screen bg-bg font-sans text-text">
       <Navbar nav={t.nav} lang={lang} nextLang={nextLang} />
       <main>
-        <Hero hero={t.hero} />
+        <Hero hero={t.hero} cards={t.projects.items} />
         <About about={t.about} />
         <Tech tech={t.tech} />
         <Challenges challenges={t.challenges} />

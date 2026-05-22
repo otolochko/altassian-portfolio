@@ -23,18 +23,20 @@ const Challenges = ({ challenges }: ChallengesProps) => {
 
   if (!mounted) {
     return (
-      <section id="challenges" className="py-20 bg-white">
+      <section id="challenges" className="py-20 bg-bg">
         <div className="max-w-7xl mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4">{challenges.title}</h2>
-            <p className="text-slate-600 max-w-2xl mx-auto">{challenges.desc}</p>
+            <h2 className="text-3xl font-bold text-text mb-4">{challenges.title}</h2>
+            <p className="text-muted max-w-2xl mx-auto">{challenges.desc}</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {challenges.items.map((_, idx) => (
               <div
                 key={idx}
-                className="bg-slate-50 rounded-xl p-6 border border-slate-100 min-h-[200px] animate-pulse"
-              />
+                className="bg-card rounded-2xl border border-border min-h-[200px] animate-pulse overflow-hidden"
+              >
+                <div className="h-1 bg-border" />
+              </div>
             ))}
           </div>
         </div>
@@ -43,31 +45,34 @@ const Challenges = ({ challenges }: ChallengesProps) => {
   }
 
   return (
-    <section id="challenges" className="py-20 bg-white">
+    <section id="challenges" className="py-20 bg-bg">
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-slate-900 mb-4">{challenges.title}</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto">{challenges.desc}</p>
+          <h2 className="text-3xl font-bold text-text mb-4">{challenges.title}</h2>
+          <p className="text-muted max-w-2xl mx-auto">{challenges.desc}</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {challenges.items.map((item, idx) => (
             <div
               key={idx}
-              className="bg-slate-50 rounded-xl p-6 border border-slate-100 group hover:border-blue-200 transition-colors"
+              className="bg-card rounded-2xl overflow-hidden border border-border shadow-glass hover:shadow-glass-lg hover:-translate-y-1 transition-[transform,box-shadow] duration-200 ease-out group"
             >
-              <div className="mb-4 pb-4 border-b border-slate-200">
-                <div className="flex items-center gap-2 mb-2 text-red-500 font-bold text-sm uppercase tracking-wide">
-                  <AlertCircle size={14} aria-hidden="true" /> Problem
+              <div className="h-1 bg-gradient-to-r from-danger to-warning group-hover:from-warning group-hover:to-danger transition-[background] duration-300 ease-out" />
+              <div className="p-6">
+                <div className="mb-4 pb-4 border-b border-border">
+                  <div className="flex items-center gap-2 mb-2 text-danger font-bold text-xs uppercase tracking-wider">
+                    <AlertCircle size={14} aria-hidden="true" /> Problem
+                  </div>
+                  <h4 className="font-semibold text-text">{item.problem}</h4>
                 </div>
-                <h4 className="font-semibold text-slate-700">{item.problem}</h4>
-              </div>
 
-              <div>
-                <div className="flex items-center gap-2 mb-2 text-blue-600 font-bold text-sm uppercase tracking-wide">
-                  <CheckCircle size={14} aria-hidden="true" /> Solution
+                <div>
+                  <div className="flex items-center gap-2 mb-2 text-accent font-bold text-xs uppercase tracking-wider">
+                    <CheckCircle size={14} aria-hidden="true" /> Solution
+                  </div>
+                  <p className="text-muted text-sm leading-relaxed">{item.solution}</p>
                 </div>
-                <p className="text-slate-600 text-sm leading-relaxed">{item.solution}</p>
               </div>
             </div>
           ))}
